@@ -8,7 +8,7 @@
 		<div id="app-content">
 			<Multiselect :options="options" :multiple="true" v-model="select"
 				:tag-width="80" :user-select="true" label="displayName"
-				track-by="user" style="width:calc(100vw - 20px)" />
+				track-by="user" style="width:calc(100% - 10px);max-width: 100vw;" />
 		</div>
 	</div>
 </template>
