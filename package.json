@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@babel/polyfill": "^7.0.0",
-		"nextcloud-vue": "^0.3.1",
+		"nextcloud-vue": "^0.4.0",
 		"uuid": "^3.3.2",
 		"vue": "^2.5.17",
 		"vue-click-outside": "^1.0.7",

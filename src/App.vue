@@ -6,9 +6,9 @@
 			</app-navigation>
 		</div>
 		<div id="app-content">
-			<div class="vueexample__container">
-				<h3>Nextcloud app example with vue components</h3>
-			</div>
+			<Multiselect :options="options" :multiple="true" v-model="select"
+				:tag-width="80" :user-select="true" label="displayName"
+				track-by="user" style="width:calc(100vw - 20px)" />
 		</div>
 	</div>
 </template>
@@ -16,16 +16,34 @@
 <script>
 import {
 	PopoverMenu,
-	AppNavigation
+	AppNavigation,
+	Multiselect
 } from 'nextcloud-vue'
 
 export default {
 	name: 'App',
 	components: {
-		PopoverMenu, AppNavigation
+		PopoverMenu, AppNavigation, Multiselect
 	},
 	data: function() {
 		return {
+			// options: [1,2,3,4,5,6,7,8,9,0],
+			options: [{
+				desc: 'Admin user',
+				displayName: 'john.doe-marry@mail.com',
+				icon: 'icon-user',
+				user: 'admin'
+			}, {
+				displayName: 'marry-jane.dolly@mariacorp.com',
+				icon: 'icon-user',
+				user: 'test0'
+			}, {
+				desc: '',
+				displayName: 'engineering-list@dev-us.io',
+				icon: 'icon-user',
+				user: 'test10'
+			}],
+			select: [],
 			isOpen: false,
 			// example popover in the content
 			menuPopover: [
@@ -123,6 +141,12 @@ export default {
 				loading: false
 			}
 		}
-	}
+	},
+	methods: {
+		addOption(val) {
+			this.options.push(val)
+			this.select.push(val)
+		}
+	},
 }
 </script>
