@@ -6,15 +6,14 @@
 			</app-navigation>
 		</div>
 		<div id="app-content">
-			<Multiselect :options="options" :multiple="true" v-model="select"
-				:tag-width="80" :user-select="true" label="displayName"
-				track-by="user" style="width:calc(100% - 10px);max-width: 100vw;" />
+			<DatetimePicker v-model="date" :lang="lang" :first-day-of-week="firstDay" />
 		</div>
 	</div>
 </template>
 
 <script>
 import {
+	DatetimePicker,
 	PopoverMenu,
 	AppNavigation,
 	Multiselect
@@ -23,10 +22,11 @@ import {
 export default {
 	name: 'App',
 	components: {
-		PopoverMenu, AppNavigation, Multiselect
+		DatetimePicker, PopoverMenu, AppNavigation, Multiselect
 	},
 	data: function() {
 		return {
+			date: new Date(),
 			// options: [1,2,3,4,5,6,7,8,9,0],
 			options: [{
 				desc: 'Admin user',
@@ -71,6 +71,25 @@ export default {
 		}
 	},
 	computed: {
+		firstDay() {
+			return window.firstDay
+				? window.firstDay
+				: 0 // sunday as default
+		},
+		lang() {
+			// fallback to default in case of unavailable data
+			return {
+				days: window.dayNamesShort
+					? window.dayNamesShort			// provided by nextcloud
+					: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
+				months: window.monthNamesShort
+					? window.monthNamesShort		// provided by nextcloud
+					: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
+				placeholder: {
+					date: 'Select Date' // TODO: Translate
+				}
+			}
+		},
 		// App navigation
 		menu: function() {
 			let defaultCategories = [
