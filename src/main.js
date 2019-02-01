@@ -29,7 +29,7 @@ Vue.prototype.n = n
 Vue.prototype.OC = OC
 Vue.prototype.OCA = OCA
 
-/* eslint-disable-next-line no-new */
-new Vue({
+export default new Vue({
+	el: '#content',
 	render: h => h(App)
-}).$mount('#content')
+})

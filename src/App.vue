@@ -1,48 +1,50 @@
 <template>
-	<AppContent :class="{'icon-loading': loading}" app-name="vueexample">
+	<app-content :class="{'icon-loading': loading}" app-name="vueexample">
 		<template slot="navigation">
 			<app-navigation-new v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
 				button-id="new-vueexample-button" button-class="icon-add" @click="newButtonAction" />
 			<ul id="app-vueexample-navigation">
-				<AppNavigationItem v-for="item in menu" :key="item.key" :item="item" />
+				<app-navigation-item v-for="item in menu" :key="item.key" :item="item" />
 			</ul>
 			<app-navigation-settings>
 				Example settings
 			</app-navigation-settings>
 		</template>
 		<template slot="content" class="app-vueexample-content">
-			This is the content
+			<span>This is the content</span> <br>
+			<datetime-picker v-model="date" /> <br>
+			<multiselect v-model="date" :placeholder="t('vueexample', 'Pick an item')" :options="menu"
+				label="text" track-by="id" />
 		</template>
-	</AppContent>
+	</app-content>
 </template>
 
 <script>
 import {
 	AppContent,
-	AppNavigation,
 	AppNavigationItem,
 	AppNavigationNew,
 	AppNavigationSettings,
 	DatetimePicker,
-	Multiselect,
-	PopoverMenu
+	Multiselect
+	// PopoverMenu
 } from 'nextcloud-vue'
 
 export default {
 	name: 'App',
 	components: {
 		AppContent,
-		AppNavigation,
 		AppNavigationItem,
 		AppNavigationNew,
 		AppNavigationSettings,
 		DatetimePicker,
-		Multiselect,
-		PopoverMenu
+		Multiselect
+		// PopoverMenu
 	},
 	data: function() {
 		return {
-			loading: false
+			loading: false,
+			date: new Date()
 		}
 	},
 	computed: {
@@ -54,11 +56,11 @@ export default {
 					classes: [],
 					href: '#',
 					icon: 'icon-category-installed',
-					text: t('settings', 'Your apps'),
+					text: t('settings', 'Your apps')
 				},
 				{
 					caption: true,
-					text: t('vueexample', 'Section'),
+					text: t('vueexample', 'Section')
 				},
 				{
 					id: 'app-category-enabled',
@@ -74,7 +76,7 @@ export default {
 							}
 						}]
 					},
-					text: t('settings', 'Active apps'),
+					text: t('settings', 'Active apps')
 				},
 				{
 					id: 'app-category-enabled',
@@ -100,7 +102,7 @@ export default {
 							}
 						]
 					},
-					text: t('settings', 'Active apps'),
+					text: t('settings', 'Active apps')
 				},
 				{
 					id: 'app-category-disabled',
@@ -108,7 +110,7 @@ export default {
 					icon: 'icon-category-disabled',
 					href: '#',
 					undo: true,
-					text: t('settings', 'Disabled apps'),
+					text: t('settings', 'Disabled apps')
 				}
 			]
 		}
@@ -130,6 +132,6 @@ export default {
 		newButtonAction(e) {
 			console.debug(e)
 		}
-	},
+	}
 }
 </script>

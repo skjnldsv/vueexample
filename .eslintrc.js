@@ -27,6 +27,17 @@ module.exports = {
 		'plugin:vue/recommended',
 		'standard'
 	],
+	settings: {
+		'import/resolver': {
+			webpack: {
+				config: 'webpack.common.js'
+			},
+			node: {
+				paths: ['src'],
+				extensions: ['.js', '.vue']
+			}
+		}
+	},
 	plugins: ['vue', 'node'],
 	rules: {
 		// space before function ()
