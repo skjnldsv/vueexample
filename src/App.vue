@@ -1,98 +1,54 @@
 <template>
-	<div id="content" class="app-vueexample">
-		<div id="app-navigation">
-			<app-navigation :menu="menu">
-				<template slot="settings-content">Example settings</template>
-			</app-navigation>
-		</div>
-		<div id="app-content">
-			<DatetimePicker v-model="date" :lang="lang" :first-day-of-week="firstDay" />
-		</div>
-	</div>
+	<AppContent :class="{'icon-loading': loading}" app-name="vueexample">
+		<template slot="navigation">
+			<app-navigation-new v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
+				button-id="new-vueexample-button" button-class="icon-add" @click="newButtonAction" />
+			<ul id="app-vueexample-navigation">
+				<AppNavigationItem v-for="item in menu" :key="item.key" :item="item" />
+			</ul>
+			<app-navigation-settings>
+				Example settings
+			</app-navigation-settings>
+		</template>
+		<template slot="content" class="app-vueexample-content">
+			This is the content
+		</template>
+	</AppContent>
 </template>
 
 <script>
 import {
-	DatetimePicker,
-	PopoverMenu,
+	AppContent,
 	AppNavigation,
-	Multiselect
+	AppNavigationItem,
+	AppNavigationNew,
+	AppNavigationSettings,
+	DatetimePicker,
+	Multiselect,
+	PopoverMenu
 } from 'nextcloud-vue'
 
 export default {
 	name: 'App',
 	components: {
-		DatetimePicker, PopoverMenu, AppNavigation, Multiselect
+		AppContent,
+		AppNavigation,
+		AppNavigationItem,
+		AppNavigationNew,
+		AppNavigationSettings,
+		DatetimePicker,
+		Multiselect,
+		PopoverMenu
 	},
 	data: function() {
 		return {
-			date: new Date(),
-			// options: [1,2,3,4,5,6,7,8,9,0],
-			options: [{
-				desc: 'Admin user',
-				displayName: 'john.doe-marry@mail.com',
-				icon: 'icon-user',
-				user: 'admin'
-			}, {
-				displayName: 'marry-jane.dolly@mariacorp.com',
-				icon: 'icon-user',
-				user: 'test0'
-			}, {
-				desc: '',
-				displayName: 'engineering-list@dev-us.io',
-				icon: 'icon-user',
-				user: 'test10'
-			}],
-			select: [],
-			isOpen: false,
-			// example popover in the content
-			menuPopover: [
-				{
-					icon: 'icon-delete',
-					text: 'Delete item',
-					action: () => {
-						alert('Deleted!')
-					}
-				},
-				{
-					icon: 'icon-user',
-					text: 'Nextcloud website',
-					action: () => {},
-					href: 'https://nextcloud.com'
-				},
-				{
-					icon: 'icon-details',
-					longtext: 'Add item',
-					action: () => {
-						alert('details')
-					}
-				}
-			]
+			loading: false
 		}
 	},
 	computed: {
-		firstDay() {
-			return window.firstDay
-				? window.firstDay
-				: 0 // sunday as default
-		},
-		lang() {
-			// fallback to default in case of unavailable data
-			return {
-				days: window.dayNamesShort
-					? window.dayNamesShort			// provided by nextcloud
-					: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
-				months: window.monthNamesShort
-					? window.monthNamesShort		// provided by nextcloud
-					: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
-				placeholder: {
-					date: 'Select Date' // TODO: Translate
-				}
-			}
-		},
 		// App navigation
 		menu: function() {
-			let defaultCategories = [
+			return [
 				{
 					id: 'app-category-your-apps',
 					classes: [],
@@ -155,16 +111,24 @@ export default {
 					text: t('settings', 'Disabled apps'),
 				}
 			]
-			return {
-				items: defaultCategories,
-				loading: false
-			}
 		}
 	},
 	methods: {
 		addOption(val) {
 			this.options.push(val)
 			this.select.push(val)
+		},
+		previous(data) {
+			console.debug(data)
+		},
+		next(data) {
+			console.debug(data)
+		},
+		close(data) {
+			console.debug(data)
+		},
+		newButtonAction(e) {
+			console.debug(e)
 		}
 	},
 }
