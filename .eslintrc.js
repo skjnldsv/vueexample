@@ -15,10 +15,13 @@ module.exports = {
 		VueRouter: true
 	},
 	parserOptions: {
-		parser: 'babel-eslint'
+		parser: 'babel-eslint',
+		ecmaVersion: 6
 	},
 	extends: [
 		'eslint:recommended',
+		'plugin:import/errors',
+		'plugin:import/warnings',
 		'plugin:node/recommended',
 		'plugin:vue/essential',
 		'plugin:vue/recommended',
@@ -39,11 +42,9 @@ module.exports = {
 		'no-tabs': 0,
 		'vue/html-indent': ['error', 'tab'],
 		// only debug console
-		'no-console': ['error', { allow: ['error', 'warn', 'debug'] }],
+		'no-console': ['error', { allow: ['error', 'warn', 'info', 'debug'] }],
 		// classes blocks
 		'padded-blocks': ['error', { classes: 'always' }],
-		// always add a trailing comma, for diff readability
-		'comma-dangle': ["error", "only-multiline"],
 		// always have the operator in front
 		'operator-linebreak': ['error', 'before'],
 		// ternary on multiline
@@ -59,8 +60,12 @@ module.exports = {
 		// es6 import/export and require
 		'node/no-unpublished-require': ['off'],
 		'node/no-unsupported-features/es-syntax': ['off'],
+		// kebab case components for vuejs
+		'vue/component-name-in-template-casing': ['error', 'kebab-case'],
 		// space before self-closing elements
 		'vue/html-closing-bracket-spacing': 'error',
+		// no ending html tag on a new line
+		'vue/html-closing-bracket-newline': ['error', { multiline: 'never' }],
 		// code spacing with attributes
 		'vue/max-attributes-per-line': [
 			'error',
@@ -73,4 +78,4 @@ module.exports = {
 			}
 		]
 	}
-};
+}
