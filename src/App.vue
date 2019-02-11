@@ -1,6 +1,6 @@
 <template>
 	<app-content :class="{'icon-loading': loading}" app-name="vueexample">
-		<template slot="navigation">
+		<template #navigation>
 			<app-navigation-new v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
 				button-id="new-vueexample-button" button-class="icon-add" @click="newButtonAction" />
 			<ul id="app-vueexample-navigation">
@@ -10,7 +10,7 @@
 				Example settings
 			</app-navigation-settings>
 		</template>
-		<template slot="content" class="app-vueexample-content">
+		<template #content class="app-vueexample-content">
 			<span>This is the content</span> <br>
 			<datetime-picker v-model="date" /> <br>
 			<multiselect v-model="date" :placeholder="t('vueexample', 'Pick an item')" :options="menu"
