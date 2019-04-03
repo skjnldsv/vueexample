@@ -34,7 +34,7 @@
 		"stylelint:fix": "stylelint src --fix"
 	},
 	"dependencies": {
-		"@babel/polyfill": "^7.4.0",
+		"@babel/polyfill": "^7.4.3",
 		"nextcloud-server": "^0.15.9",
 		"nextcloud-vue": "^0.9.5",
 		"uuid": "^3.3.2",
