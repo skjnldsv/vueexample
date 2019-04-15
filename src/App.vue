@@ -1,50 +1,82 @@
 <template>
-	<app-content :class="{'icon-loading': loading}" app-name="vueexample">
-		<template #navigation>
-			<app-navigation-new v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
+	<Content :class="{'icon-loading': loading}" app-name="vueexample">
+		<AppNavigation>
+			<AppNavigationNew v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
 				button-id="new-vueexample-button" button-class="icon-add" @click="newButtonAction" />
 			<ul id="app-vueexample-navigation">
-				<app-navigation-item v-for="item in menu" :key="item.key" :item="item" />
+				<AppNavigationItem v-for="item in menu" :key="item.key" :item="item" />
 			</ul>
-			<app-navigation-settings>
+			<AppNavigationSettings>
 				Example settings
-			</app-navigation-settings>
-		</template>
-		<template #content class="app-vueexample-content">
-			<span>This is the content</span> <br>
-			<datetime-picker v-model="date" /> <br>
-			<multiselect v-model="date" :placeholder="t('vueexample', 'Pick an item')" :options="menu"
-				label="text" track-by="id" />
-		</template>
-	</app-content>
+			</AppNavigationSettings>
+		</AppNavigation>
+		<AppContent>
+			<span>This is the content</span>
+			<button @click="show = !show">
+				Toggle sidebar
+			</button>
+		</AppContent>
+		<AppSidebar v-show="show" title="christmas-image-2018-12-25-00:01:12.jpg" subtitle="4,3 MB, last edited 41 days ago"
+			:actions="menu" :starred.sync="starred"
+			@close="show=false">
+			<template #action>
+				<button class="primary">
+					Button 1
+				</button>
+				<input id="link-checkbox" name="link-checkbox" class="checkbox link-checkbox"
+					type="checkbox">
+				<label for="link-checkbox" class="link-checkbox-label">Do something</label>
+			</template>
+			<AppSidebarTab name="Chat" icon="icon-talk">
+				this is the chat tab
+			</AppSidebarTab>
+			<AppSidebarTab name="Activity" icon="icon-activity">
+				this is the activity tab
+			</AppSidebarTab>
+			<AppSidebarTab name="Comments" icon="icon-comment">
+				this is the comments tab
+			</AppSidebarTab>
+			<AppSidebarTab name="Sharing" icon="icon-shared">
+				this is the sharing tab
+			</AppSidebarTab>
+			<AppSidebarTab name="Versions" icon="icon-history">
+				this is the versions tab
+			</AppSidebarTab>
+		</AppSidebar>
+	</Content>
 </template>
 
 <script>
 import {
+	Content,
 	AppContent,
+	AppNavigation,
 	AppNavigationItem,
 	AppNavigationNew,
 	AppNavigationSettings,
-	DatetimePicker,
-	Multiselect
-	// PopoverMenu
+	AppSidebar,
+	AppSidebarTab
 } from 'nextcloud-vue'
 
 export default {
 	name: 'App',
 	components: {
+		Content,
 		AppContent,
+		AppNavigation,
 		AppNavigationItem,
 		AppNavigationNew,
 		AppNavigationSettings,
-		DatetimePicker,
-		Multiselect
-		// PopoverMenu
+		AppSidebar,
+		AppSidebarTab
 	},
 	data: function() {
 		return {
 			loading: false,
-			date: new Date()
+			date: Date.now() + 86400000 * 3,
+			date2: Date.now() + 86400000 * 3 + Math.floor(Math.random() * 86400000 / 2),
+			show: true,
+			starred: false
 		}
 	},
 	computed: {
@@ -54,7 +86,8 @@ export default {
 				{
 					id: 'app-category-your-apps',
 					classes: [],
-					href: '#',
+					href: '#1',
+					// action: this.log,
 					icon: 'icon-category-installed',
 					text: t('settings', 'Your apps')
 				},
@@ -66,7 +99,7 @@ export default {
 					id: 'app-category-enabled',
 					classes: [],
 					icon: 'icon-category-enabled',
-					href: '#',
+					href: '#2',
 					utils: {
 						actions: [{
 							icon: 'icon-delete',
@@ -82,7 +115,7 @@ export default {
 					id: 'app-category-enabled',
 					classes: [],
 					icon: 'icon-category-enabled',
-					href: '#',
+					href: '#3',
 					utils: {
 						counter: 123,
 						actions: [
@@ -108,7 +141,7 @@ export default {
 					id: 'app-category-disabled',
 					classes: [],
 					icon: 'icon-category-disabled',
-					href: '#',
+					href: '#4',
 					undo: true,
 					text: t('settings', 'Disabled apps')
 				}
@@ -130,6 +163,9 @@ export default {
 			console.debug(data)
 		},
 		newButtonAction(e) {
+			console.debug(e)
+		},
+		log(e) {
 			console.debug(e)
 		}
 	}
