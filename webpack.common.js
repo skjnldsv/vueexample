@@ -24,11 +24,13 @@ module.exports = {
 			{
 				test: /\.(js|vue)$/,
 				use: 'eslint-loader',
+				exclude: /node_modules/,
 				enforce: 'pre'
 			},
 			{
 				test: /\.vue$/,
-				loader: 'vue-loader'
+				loader: 'vue-loader',
+				exclude: /node_modules/
 			},
 			{
 				test: /\.js$/,
@@ -50,6 +52,6 @@ module.exports = {
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 	],
 	resolve: {
-		extensions: ['*', '.js', '.vue', '.json']
+		extensions: ['*', '.js', '.vue']
 	}
 }
