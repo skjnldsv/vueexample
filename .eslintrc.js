@@ -25,6 +25,7 @@ module.exports = {
 		'plugin:node/recommended',
 		'plugin:vue/essential',
 		'plugin:vue/recommended',
+		'plugin:nextcloud/recommended',
 		'standard'
 	],
 	settings: {
@@ -73,6 +74,11 @@ module.exports = {
 		'node/no-unsupported-features/es-syntax': ['off'],
 		// kebab case components for vuejs
 		'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+		// force name
+		'vue/match-component-file-name': ['error', {
+			'extensions': ['jsx', 'vue', 'js'],
+			'shouldMatchCase': true
+		 }],
 		// space before self-closing elements
 		'vue/html-closing-bracket-spacing': 'error',
 		// no ending html tag on a new line
