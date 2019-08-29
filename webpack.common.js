@@ -48,8 +48,7 @@ module.exports = {
 	},
 	plugins: [
 		new VueLoaderPlugin(),
-		new StyleLintPlugin(),
-		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+		new StyleLintPlugin()
 	],
 	resolve: {
 		extensions: ['*', '.js', '.vue']
