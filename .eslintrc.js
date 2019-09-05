@@ -2,9 +2,9 @@ module.exports = {
 	root: true,
 	env: {
 		browser: true,
+		commonjs: true,
 		es6: true,
 		node: true,
-		jest: true
 	},
 	globals: {
 		t: true,
@@ -63,11 +63,11 @@ module.exports = {
 		'multiline-ternary': ['error', 'always-multiline'],
 		// force proper JSDocs
 		'valid-jsdoc': [2, {
-			'prefer': {
-				'return': 'returns'
+			prefer: {
+				return: 'returns'
 			},
-			'requireReturn': false,
-			'requireReturnDescription': false
+			requireReturn: false,
+			requireReturnDescription: false
 		}],
 		// es6 import/export and require
 		'node/no-unpublished-require': ['off'],
@@ -77,23 +77,24 @@ module.exports = {
 		'vue/component-name-in-template-casing': ['error', 'PascalCase'],
 		// force name
 		'vue/match-component-file-name': ['error', {
-			'extensions': ['jsx', 'vue', 'js'],
-			'shouldMatchCase': true
-		 }],
+			extensions: ['jsx', 'vue', 'js'],
+			shouldMatchCase: true
+		}],
 		// space before self-closing elements
 		'vue/html-closing-bracket-spacing': 'error',
 		// no ending html tag on a new line
 		'vue/html-closing-bracket-newline': ['error', { multiline: 'never' }],
+		// check vue files too
+		'node/no-missing-import': ['error', {
+			tryExtensions: ['.js', '.vue']
+		}],
 		// code spacing with attributes
-		'vue/max-attributes-per-line': [
-			'error',
-			{
-				singleline: 3,
-				multiline: {
-					max: 3,
-					allowFirstLine: true
-				}
+		'vue/max-attributes-per-line': ['error', {
+			singleline: 3,
+			multiline: {
+				max: 3,
+				allowFirstLine: true
 			}
-		]
+		}]
 	}
-}
+};
