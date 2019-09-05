@@ -1,15 +1,16 @@
 const path = require('path')
-const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+const packageJson = require('./package.json')
+const appName = packageJson.name
 
 module.exports = {
 	entry: path.join(__dirname, 'src', 'main.js'),
 	output: {
 		path: path.resolve(__dirname, './js'),
 		publicPath: '/js/',
-		filename: 'vueexample.js',
-		chunkFilename: 'chunks/[name].js'
+		filename: `${appName}.js`,
+		chunkFilename: 'chunks/[name]-[hash].js'
 	},
 	module: {
 		rules: [
@@ -36,13 +37,6 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: /node_modules/
-			},
-			{
-				test: /\.(png|jpg|gif|svg)$/,
-				loader: 'file-loader',
-				options: {
-					name: '[name].[ext]?[hash]'
-				}
 			}
 		]
 	},

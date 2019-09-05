@@ -47,16 +47,14 @@
 </template>
 
 <script>
-import {
-	Content,
-	AppContent,
-	AppNavigation,
-	AppNavigationItem,
-	AppNavigationNew,
-	AppNavigationSettings,
-	AppSidebar,
-	AppSidebarTab
-} from 'nextcloud-vue'
+import Content from 'nextcloud-vue/dist/Components/Content'
+import AppContent from 'nextcloud-vue/dist/Components/AppContent'
+import AppNavigation from 'nextcloud-vue/dist/Components/AppNavigation'
+import AppNavigationItem from 'nextcloud-vue/dist/Components/AppNavigationItem'
+import AppNavigationNew from 'nextcloud-vue/dist/Components/AppNavigationNew'
+import AppNavigationSettings from 'nextcloud-vue/dist/Components/AppNavigationSettings'
+import AppSidebar from 'nextcloud-vue/dist/Components/AppSidebar'
+import AppSidebarTab from 'nextcloud-vue/dist/Components/AppSidebarTab'
 
 export default {
 	name: 'App',
