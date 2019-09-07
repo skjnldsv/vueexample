@@ -1,8 +1,12 @@
 <template>
 	<Content :class="{'icon-loading': loading}" app-name="vueexample">
 		<AppNavigation>
-			<AppNavigationNew v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
-				button-id="new-vueexample-button" button-class="icon-add" @click="newButtonAction" />
+			<AppNavigationNew v-if="!loading"
+				:text="t('vueexample', 'New XXXXXX')"
+				:disabled="false"
+				button-id="new-vueexample-button"
+				button-class="icon-add"
+				@click="newButtonAction" />
 			<ul id="app-vueexample-navigation">
 				<AppNavigationItem icon="icon-user" title="This is a user">
 					<AppNavigationCounter slot="counter" :highlighted="true">
@@ -18,13 +22,15 @@
 						<ActionLink icon="icon-external" title="Link" href="https://nextcloud.com" />
 					</template>
 				</AppNavigationItem>
-				<AppNavigationItem  title="This is bullet item">
+				<AppNavigationItem title="This is bullet item">
 					<AppNavigationIconBullet slot="icon" color="0082c9" />
 					<template slot="actions">
 						<ActionButton :disabled="false" icon="icon-edit" @click="alert('Edit')">
 							Edit
 						</ActionButton>
-						<ActionLink :disabled="false" icon="icon-external" title="Link"
+						<ActionLink :disabled="false"
+							icon="icon-external"
+							title="Link"
 							href="https://nextcloud.com" />
 						<ActionCheckbox :disabled="false">
 							Checkbox
@@ -58,7 +64,8 @@
 						<ActionLink icon="icon-external" title="Link" href="https://nextcloud.com" />
 					</template>
 				</AppNavigationItem>
-				<AppNavigationItem title="Item with children" :allowCollapse="true"
+				<AppNavigationItem title="Item with children"
+					:allow-collapse="true"
 					icon="icon-folder">
 					<template>
 						<AppNavigationItem title="AppNavigationItemChild1">
@@ -70,16 +77,20 @@
 					</template>
 				</AppNavigationItem>
 				<AppNavigationItem title="Loading Item" :loading="true" />
-				<AppNavigationItem title="Event Item" @click="console.log('clicked')"  icon="icon-folder" />
-				<AppNavigationItem title="Editable Item" icon="icon-folder"
+				<AppNavigationItem title="Event Item" icon="icon-folder" @click="console.log('clicked')" />
+				<AppNavigationItem title="Editable Item"
+					icon="icon-folder"
 					:editable="true"
-					editPlaceholder="I am a placeholder" />
+					edit-placeholder="I am a placeholder" />
 				<AppNavigationItem title="Are you sure you want to delete?" :undo="true" />
-				<AppNavigationItem title="First pinned item" icon="icon-category-enabled"
+				<AppNavigationItem title="First pinned item"
+					icon="icon-category-enabled"
 					:pinned="true" />
-				<AppNavigationItem title="Second pinned item" icon="icon-category-enabled"
+				<AppNavigationItem title="Second pinned item"
+					icon="icon-category-enabled"
 					:pinned="true" />
-				<AppNavigationItem title="Third pinned item" icon="icon-category-enabled"
+				<AppNavigationItem title="Third pinned item"
+					icon="icon-category-enabled"
 					:pinned="true" />
 			</ul>
 			<AppNavigationSettings>
@@ -92,14 +103,19 @@
 				Toggle sidebar
 			</button>
 		</AppContent>
-		<AppSidebar v-show="show" title="christmas-image-2018-12-25-00:01:12.jpg" subtitle="4,3 MB, last edited 41 days ago"
-			:actions="menu" :starred.sync="starred"
+		<AppSidebar v-show="show"
+			title="christmas-image-2018-12-25-00:01:12.jpg"
+			subtitle="4,3 MB, last edited 41 days ago"
+			:actions="menu"
+			:starred.sync="starred"
 			@close="show=false">
 			<template #action>
 				<button class="primary">
 					Button 1
 				</button>
-				<input id="link-checkbox" name="link-checkbox" class="checkbox link-checkbox"
+				<input id="link-checkbox"
+					name="link-checkbox"
+					class="checkbox link-checkbox"
 					type="checkbox">
 				<label for="link-checkbox" class="link-checkbox-label">Do something</label>
 			</template>
