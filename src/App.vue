@@ -1,8 +1,12 @@
 <template>
 	<Content :class="{'icon-loading': loading}" app-name="vueexample">
 		<AppNavigation>
-			<AppNavigationNew v-if="!loading" :text="t('vueexample', 'New XXXXXX')" :disabled="false"
-				button-id="new-vueexample-button" button-class="icon-add" @click="newButtonAction" />
+			<AppNavigationNew v-if="!loading"
+				:text="t('vueexample', 'New XXXXXX')"
+				:disabled="false"
+				button-id="new-vueexample-button"
+				button-class="icon-add"
+				@click="newButtonAction" />
 			<ul id="app-vueexample-navigation">
 				<AppNavigationItem v-for="item in menu" :key="item.key" :item="item" />
 			</ul>
@@ -16,14 +20,19 @@
 				Toggle sidebar
 			</button>
 		</AppContent>
-		<AppSidebar v-show="show" title="christmas-image-2018-12-25-00:01:12.jpg" subtitle="4,3 MB, last edited 41 days ago"
-			:actions="menu" :starred.sync="starred"
+		<AppSidebar v-show="show"
+			title="christmas-image-2018-12-25-00:01:12.jpg"
+			subtitle="4,3 MB, last edited 41 days ago"
+			:actions="menu"
+			:starred.sync="starred"
 			@close="show=false">
 			<template #action>
 				<button class="primary">
 					Button 1
 				</button>
-				<input id="link-checkbox" name="link-checkbox" class="checkbox link-checkbox"
+				<input id="link-checkbox"
+					name="link-checkbox"
+					class="checkbox link-checkbox"
 					type="checkbox">
 				<label for="link-checkbox" class="link-checkbox-label">Do something</label>
 			</template>
