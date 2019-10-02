@@ -15,10 +15,7 @@
 			</AppNavigationSettings>
 		</AppNavigation>
 		<AppContent>
-			<span>This is the content</span>
-			<button @click="show = !show">
-				Toggle sidebar
-			</button>
+			<span>This is the content! It have changed for this pull request test purpose</span>
 		</AppContent>
 		<AppSidebar v-show="show"
 			title="christmas-image-2018-12-25-00:01:12.jpg"
