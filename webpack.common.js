@@ -1,6 +1,8 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+const BundleAnalyzerPlugin = require('@bundle-analyzer/webpack-plugin')
+
 const packageJson = require('./package.json')
 const appName = packageJson.name
 
@@ -42,7 +44,8 @@ module.exports = {
 	},
 	plugins: [
 		new VueLoaderPlugin(),
-		new StyleLintPlugin()
+		new StyleLintPlugin(),
+		new BundleAnalyzerPlugin({ token: process.env.BUNDLE_ANALYZER_TOKEN })
 	],
 	resolve: {
 		extensions: ['*', '.js', '.vue']
