@@ -56,6 +56,4 @@ if (process.env.BUNDLE_ANALYZER_TOKEN) {
 	config.plugins.push(new BundleAnalyzerPlugin({ token: process.env.BUNDLE_ANALYZER_TOKEN }))
 }
 
-console.info(config)
-
 module.exports = config
