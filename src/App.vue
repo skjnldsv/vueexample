@@ -156,8 +156,8 @@ import {
 	ActionInput,
 	ActionRouter,
 	ActionText,
-	ActionTextEditable
-} from 'nextcloud-vue'
+	ActionTextEditable,
+} from '@nextcloud/vue'
 
 export default {
 	name: 'App',
@@ -178,7 +178,7 @@ export default {
 		ActionInput,
 		ActionRouter,
 		ActionText,
-		ActionTextEditable
+		ActionTextEditable,
 	},
 	data: function() {
 		return {
@@ -186,7 +186,7 @@ export default {
 			date: Date.now() + 86400000 * 3,
 			date2: Date.now() + 86400000 * 3 + Math.floor(Math.random() * 86400000 / 2),
 			show: true,
-			starred: false
+			starred: false,
 		}
 	},
 	computed: {
@@ -199,11 +199,11 @@ export default {
 					href: '#1',
 					// action: this.log,
 					icon: 'icon-category-installed',
-					text: t('settings', 'Your apps')
+					text: t('settings', 'Your apps'),
 				},
 				{
 					caption: true,
-					text: t('vueexample', 'Section')
+					text: t('vueexample', 'Section'),
 				},
 				{
 					id: 'app-category-enabled',
@@ -216,15 +216,15 @@ export default {
 							text: t('settings', 'Remove group'),
 							action: function() {
 								alert('remove')
-							}
-						}]
+							},
+						}],
 					},
-					text: t('settings', 'Active apps')
+					text: t('settings', 'Active apps'),
 				},
 				{
 					id: 'app-category-enabled',
 					classes: [],
-					href: '#3'
+					href: '#3',
 				},
 				{
 					id: 'app-category-disabled',
@@ -232,10 +232,10 @@ export default {
 					icon: 'icon-category-disabled',
 					href: '#4',
 					undo: true,
-					text: t('settings', 'Disabled apps')
-				}
+					text: t('settings', 'Disabled apps'),
+				},
 			]
-		}
+		},
 	},
 	methods: {
 		addOption(val) {
@@ -256,7 +256,7 @@ export default {
 		},
 		log(e) {
 			console.debug(e)
-		}
-	}
+		},
+	},
 }
 </script>
