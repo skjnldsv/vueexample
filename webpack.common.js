@@ -3,8 +3,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const BundleAnalyzerPlugin = require('@bundle-analyzer/webpack-plugin')
 
-const packageJson = require('./package.json')
-const appName = packageJson.name
+const appName = require('./package.json').name
 
 const config = {
 	entry: path.join(__dirname, 'src', 'main.js'),
