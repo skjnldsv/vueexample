@@ -1,0 +1,13 @@
+{
+	"name": "skjnldsv/vueexample",
+	"description": "Lint config for skjnldsv/vueexample",
+	"license": "MIT",
+	"config": {
+	  "optimize-autoloader": true,
+	  "classmap-authoritative": true
+	},
+	"scripts": {
+	  "lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l \"{}\" \\;"
+	}
+  }
+  
