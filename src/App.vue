@@ -127,8 +127,8 @@
 				</ActionButton>
 				<ActionLink icon="icon-external" title="Link" href="https://nextcloud.com" />
 			</template>
-			<AppSidebarTab id="chat" name="Chat" icon="icon-talk">
-				this is the chat tab
+			<AppSidebarTab id="vueexample" name="Vueexample" icon="icon-vueexample">
+				this is the vueexample tab
 			</AppSidebarTab>
 			<AppSidebarTab id="activity" name="Activity" icon="icon-activity">
 				this is the activity tab
@@ -147,25 +147,23 @@
 </template>
 
 <script>
-import {
-	Content,
-	AppContent,
-	AppNavigation,
-	AppNavigationItem,
-	AppNavigationNew,
-	AppNavigationSettings,
-	AppSidebar,
-	AppSidebarTab,
-	AppNavigationCounter,
-	ActionButton,
-	ActionLink,
-	AppNavigationIconBullet,
-	ActionCheckbox,
-	ActionInput,
-	ActionRouter,
-	ActionText,
-	ActionTextEditable,
-} from '@nextcloud/vue'
+import Content from '@nextcloud/vue/dist/Components/Content'
+import AppContent from '@nextcloud/vue/dist/Components/AppContent'
+import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
+import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import AppNavigationNew from '@nextcloud/vue/dist/Components/AppNavigationNew'
+import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
+import AppSidebar from '@nextcloud/vue/dist/Components/AppSidebar'
+import AppSidebarTab from '@nextcloud/vue/dist/Components/AppSidebarTab'
+import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigationIconBullet'
+import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
+import ActionInput from '@nextcloud/vue/dist/Components/ActionInput'
+import ActionRouter from '@nextcloud/vue/dist/Components/ActionRouter'
+import ActionText from '@nextcloud/vue/dist/Components/ActionText'
+import ActionTextEditable from '@nextcloud/vue/dist/Components/ActionTextEditable'
 
 export default {
 	name: 'App',
