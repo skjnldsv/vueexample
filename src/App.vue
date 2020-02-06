@@ -119,19 +119,19 @@
 					type="checkbox">
 				<label for="link-checkbox" class="link-checkbox-label">Do something</label>
 			</template>
-			<AppSidebarTab name="Chat" icon="icon-talk">
+			<AppSidebarTab id="chat" name="Chat" icon="icon-talk">
 				this is the chat tab
 			</AppSidebarTab>
-			<AppSidebarTab name="Activity" icon="icon-activity">
+			<AppSidebarTab id="activity" name="Activity" icon="icon-activity">
 				this is the activity tab
 			</AppSidebarTab>
-			<AppSidebarTab name="Comments" icon="icon-comment">
+			<AppSidebarTab id="comments" name="Comments" icon="icon-comment">
 				this is the comments tab
 			</AppSidebarTab>
-			<AppSidebarTab name="Sharing" icon="icon-shared">
+			<AppSidebarTab id="sharing" name="Sharing" icon="icon-shared">
 				this is the sharing tab
 			</AppSidebarTab>
-			<AppSidebarTab name="Versions" icon="icon-history">
+			<AppSidebarTab id="versions" name="Versions" icon="icon-history">
 				this is the versions tab
 			</AppSidebarTab>
 		</AppSidebar>
