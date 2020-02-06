@@ -4,7 +4,7 @@ all: dev-setup lint build-js-production test
 dev-setup: clean clean-dev npm-init
 
 npm-init:
-	npm install
+	npm ci
 
 npm-update:
 	npm update
@@ -45,8 +45,7 @@ stylelint-fix:
 
 # Cleaning
 clean:
-	rm -f js/vueexample.js
-	rm -f js/vueexample.js.map
+	rm -f js/*
 
 clean-dev:
 	rm -rf node_modules
