@@ -3,11 +3,12 @@
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>vueexample</id>
     <name>Vue example</name>
-    <summary>test</summary>
+    <summary>A vue example app</summary>
     <description><![CDATA[test]]></description>
-    <version>0.0.1</version>
+    <version>4.0.0</version>
     <licence>agpl</licence>
     <author mail="jus@bitgrid.net" >Julius Härtl</author>
+	<author mail="skjnldsv@protonmail.com">John Molakvoæ</author>
     <namespace>VueExample</namespace>
     <category>tools</category>
     <bugs>https://github.com</bugs>
