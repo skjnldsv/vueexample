@@ -104,12 +104,11 @@
 			</button>
 		</AppContent>
 		<AppSidebar v-show="show"
-			title="christmas-image-2018-12-25-00:01:12.jpg"
+			title="eberhard-grossgasteiger-VDw-nsi5TpE-unsplash.jpg"
 			subtitle="4,3 MB, last edited 41 days ago"
-			:actions="menu"
 			:starred.sync="starred"
 			@close="show=false">
-			<template #action>
+			<template #primary-actions>
 				<button class="primary">
 					Button 1
 				</button>
@@ -118,6 +117,15 @@
 					class="checkbox link-checkbox"
 					type="checkbox">
 				<label for="link-checkbox" class="link-checkbox-label">Do something</label>
+			</template>
+			<template #secondary-actions>
+				<ActionButton icon="icon-edit" @click="alert('Edit')">
+					Edit
+				</ActionButton>
+				<ActionButton icon="icon-delete" @click="alert('Delete')">
+					Delete
+				</ActionButton>
+				<ActionLink icon="icon-external" title="Link" href="https://nextcloud.com" />
 			</template>
 			<AppSidebarTab id="chat" name="Chat" icon="icon-talk">
 				this is the chat tab
@@ -188,54 +196,6 @@ export default {
 			show: true,
 			starred: false,
 		}
-	},
-	computed: {
-		// App navigation
-		menu: function() {
-			return [
-				{
-					id: 'app-category-your-apps',
-					classes: [],
-					href: '#1',
-					// action: this.log,
-					icon: 'icon-category-installed',
-					text: t('settings', 'Your apps'),
-				},
-				{
-					caption: true,
-					text: t('vueexample', 'Section'),
-				},
-				{
-					id: 'app-category-enabled',
-					classes: [],
-					icon: 'icon-category-enabled',
-					href: '#2',
-					utils: {
-						actions: [{
-							icon: 'icon-delete',
-							text: t('settings', 'Remove group'),
-							action: function() {
-								alert('remove')
-							},
-						}],
-					},
-					text: t('settings', 'Active apps'),
-				},
-				{
-					id: 'app-category-enabled',
-					classes: [],
-					href: '#3',
-				},
-				{
-					id: 'app-category-disabled',
-					classes: [],
-					icon: 'icon-category-disabled',
-					href: '#4',
-					undo: true,
-					text: t('settings', 'Disabled apps'),
-				},
-			]
-		},
 	},
 	methods: {
 		addOption(val) {
