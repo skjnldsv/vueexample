@@ -20,7 +20,7 @@
  *
  */
 import Vue from 'vue'
-import { translate, translatePlural } from 'nextcloud-l10n'
+import { translate, translatePlural } from '@nextcloud/l10n'
 
 import App from './App'
 
