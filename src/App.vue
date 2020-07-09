@@ -7,7 +7,7 @@
 				button-id="new-vueexample-button"
 				button-class="icon-add"
 				@click="newButtonAction" />
-			<ul id="app-vueexample-navigation">
+			<template id="app-vueexample-navigation" #list>
 				<AppNavigationItem icon="icon-user" title="This is a user">
 					<AppNavigationCounter slot="counter" :highlighted="true">
 						99+
@@ -92,7 +92,7 @@
 				<AppNavigationItem title="Third pinned item"
 					icon="icon-category-enabled"
 					:pinned="true" />
-			</ul>
+			</template>
 			<AppNavigationSettings>
 				Example settings
 			</AppNavigationSettings>
@@ -186,7 +186,7 @@ export default {
 		ActionText,
 		ActionTextEditable,
 	},
-	data: function() {
+	data() {
 		return {
 			loading: false,
 			date: Date.now() + 86400000 * 3,
