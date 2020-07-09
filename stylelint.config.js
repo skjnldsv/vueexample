@@ -8,7 +8,7 @@ module.exports = {
 			'always',
 			{
 				ignore: ['after-comment', 'inside-block'],
-			},
+			}
 		],
 		'declaration-empty-line-before': [
 			'never',
@@ -21,6 +21,12 @@ module.exports = {
 		'selector-list-comma-newline-after': null,
 		'no-descending-specificity': null,
 		'string-quotes': 'single',
+		'selector-pseudo-element-no-unknown': [
+			true,
+			{
+				ignorePseudoElements: ['v-deep'],
+			},
+		],
 	},
 	plugins: ['stylelint-scss'],
 }
