@@ -218,8 +218,3 @@ export default {
 	},
 }
 </script>
-<style lang="scss" scoped>
-#vueexample {
-
-}
-</style>
