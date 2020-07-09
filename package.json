@@ -50,6 +50,7 @@
 		"@nextcloud/browserslist-config": "^1.0.0",
 		"@nextcloud/eslint-config": "^2.2.0",
 		"@nextcloud/eslint-plugin": "^1.4.0",
+		"@nextcloud/webpack-vue-config": "^1.0.2",
 		"@vue/test-utils": "^1.0.3",
 		"babel-eslint": "^10.1.0",
 		"babel-loader": "^8.1.0",
@@ -73,7 +74,6 @@
 		"vue-template-compiler": "^2.6.11",
 		"webpack": "^4.43.0",
 		"webpack-cli": "^3.3.12",
-		"webpack-merge": "^4.2.2",
-		"webpack-vue-config": "git+https://github.com/skjnldsv/webpack-vue-config.git"
+		"webpack-merge": "^5.0.8"
 	}
 }
