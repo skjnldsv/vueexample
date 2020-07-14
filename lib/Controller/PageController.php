@@ -43,7 +43,7 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function index() {
-		Util::addScript($this->appName, 'vueexample');
+		Util::addScript($this->appName, 'vueexample-main');
 		Util::addStyle($this->appName, 'icons');
 
 		$response = new TemplateResponse($this->appName, 'main');
