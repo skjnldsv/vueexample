@@ -1,0 +1,20 @@
+name: Compile Command
+on:
+  repository_dispatch:
+    types: [compile-command]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output command and arguments
+        run: |
+          echo ${{ github.event.client_payload.slash_command.command }}
+          echo ${{ github.event.client_payload.slash_command.args.all }}
+          echo ${{ github.event.client_payload.slash_command.args.unnamed.all }}
+          echo ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
+          echo ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+          echo ${{ github.event.client_payload.slash_command.args.named.region }}
+          echo ${{ github.event.client_payload.slash_command.args.named.branch }}
+          echo ${{ github.event.client_payload.slash_command.args.named.reason }}
+          # etc.
