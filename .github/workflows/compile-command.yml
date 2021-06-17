@@ -17,6 +17,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
 
       - name: Read package.json node and npm engines version
         uses: skjnldsv/read-package-engines-version-actions@v1
@@ -36,5 +38,26 @@ jobs:
       - name: Set up npm
         run: npm i -g npm"@${{ steps.package-engines-versions.outputs.npmVersion }}"
 
-      - name: Compile
-        run: echo compile
+      - name: Install dependencies & build
+        run: |
+          npm ci
+          npm run build --if-present
+
+      - name: Add & Commit default
+        uses: stefanzweifel/git-auto-commit-action@v4
+        # If the first argument starts with a /
+        if: ${{ startsWith(github.event.client_payload.slash_command.args.unnamed.arg1, '/') }}
+        with:
+          file_pattern: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
+          commit_message: 'Compile assets'
+          commit_options: '--signoff'
+
+      - name: Add & Commit amend or fixup
+        uses: stefanzweifel/git-auto-commit-action@v4
+        # Else this is a fixup or amend
+        if: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 == 'fixup' || github.event.client_payload.slash_command.args.unnamed.arg1 == 'amend' }}
+        with:
+          file_pattern: ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+          signoff: true
+          commit_options: '--${{ github.event.client_payload.slash_command.args.unnamed.arg1 }} --signoff'
+
