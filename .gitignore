@@ -17,3 +17,5 @@ yarn-error.log*
 js/
 build/
 coverage/
+.php_cs.cache
+vendor
