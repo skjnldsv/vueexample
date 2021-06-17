@@ -42,13 +42,14 @@ jobs:
         run: |
           npm ci
           npm run build --if-present
+          git status
 
       - name: Add & Commit default
         uses: stefanzweifel/git-auto-commit-action@v4
         # If the first argument starts with a /
         if: ${{ startsWith(github.event.client_payload.slash_command.args.unnamed.arg1, '/') }}
         with:
-          file_pattern: ${{ github.workspace	}}${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
+          file_pattern: ${{ github.workspace }}${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
           commit_message: 'Compile assets'
           commit_options: '--signoff'
 
@@ -57,6 +58,6 @@ jobs:
         # Else this is a fixup or amend
         if: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 == 'fixup' || github.event.client_payload.slash_command.args.unnamed.arg1 == 'amend' }}
         with:
-          file_pattern: ${{ github.workspace	}}${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+          file_pattern: ${{ github.workspace }}${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
           commit_options: '--${{ github.event.client_payload.slash_command.args.unnamed.arg1 }} --signoff'
 
