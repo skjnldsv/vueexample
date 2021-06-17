@@ -16,13 +16,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Read package.json node and npm engines version
+        uses: skjnldsv/read-package-engines-version-actions@master
+        id: package-engines-versions
+
+      - name: Show node version number
+        run: echo "Node version is ${{ steps.package-engines-versions.outputs.nodeVersion }}"
+
+      - name: Show npm version number
+        run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
+
       - name: Set up node
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: ${{ steps.package-engines-versions.outputs.nodeVersion }}
 
-      - name: Set up npm7
-        run: npm i -g npm@7
+      - name: Set up npm
+        run: npm i -g npm@"${{ steps.package-engines-versions.outputs.npmVersion }}"
 
       - name: Install dependencies & build
         run: |
