@@ -14,6 +14,6 @@ jobs:
             compile
           issue-type: pull-request
           permission: write
-          reaction-token: ${{ secrets.PAT }}
+          reaction-token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
           reactions: true
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
