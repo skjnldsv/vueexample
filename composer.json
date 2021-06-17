@@ -4,7 +4,10 @@
 	"license": "MIT",
 	"config": {
 		"optimize-autoloader": true,
-		"classmap-authoritative": true
+		"classmap-authoritative": true,
+		"platform": {
+			"php": "7.3"
+		}
 	},
 	"scripts": {
 		"cs:fix": "php-cs-fixer fix",
