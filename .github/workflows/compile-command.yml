@@ -57,7 +57,7 @@ jobs:
         # Else this is a fixup or amend
         if: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 == 'fixup' || github.event.client_payload.slash_command.args.unnamed.arg1 == 'amend' }}
         with:
-          file_pattern: ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+          file_pattern: ${{ github.workspace	}}${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
           signoff: true
           commit_options: '--${{ github.event.client_payload.slash_command.args.unnamed.arg1 }} --signoff'
 
