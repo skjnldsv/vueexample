@@ -46,7 +46,7 @@ class PageController extends Controller {
 		Util::addScript($this->appName, 'vueexample-main');
 		Util::addStyle($this->appName, 'icons');
 
-		$response = new TemplateResponse($this->appName, 'main');
+		$response = new TemplateResponse($this->appName, $this->appName . '-main');
 		return $response;
 	}
 }
