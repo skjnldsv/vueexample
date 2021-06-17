@@ -1,0 +1,63 @@
+name: Compile Command
+on:
+  repository_dispatch:
+    types: [compile-command]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output command and arguments
+        run: |
+          echo ${{ github.event.client_payload.slash_command.command }}
+          echo ${{ github.event.client_payload.slash_command.args.all }}
+          echo ${{ github.event.client_payload.slash_command.args.unnamed.all }}
+          echo ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
+          echo ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
+
+      - name: Read package.json node and npm engines version
+        uses: skjnldsv/read-package-engines-version-actions@v1
+        id: package-engines-versions
+
+      - name: Show node version number
+        run: echo "Node version is ${{ steps.package-engines-versions.outputs.nodeVersion }}"
+
+      - name: Show npm version number
+        run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.package-engines-versions.outputs.nodeVersion }}
+
+      - name: Set up npm
+        run: npm i -g npm"@${{ steps.package-engines-versions.outputs.npmVersion }}"
+
+      - name: Install dependencies & build
+        run: |
+          npm ci
+          npm run build --if-present
+
+      - name: Add & Commit default
+        uses: stefanzweifel/git-auto-commit-action@v4
+        # If the first argument starts with a /
+        if: ${{ startsWith(github.event.client_payload.slash_command.args.unnamed.arg1, '/') }}
+        with:
+          file_pattern: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
+          commit_message: 'Compile assets'
+          commit_options: '--signoff'
+
+      - name: Add & Commit amend or fixup
+        uses: stefanzweifel/git-auto-commit-action@v4
+        # Else this is a fixup or amend
+        if: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 == 'fixup' || github.event.client_payload.slash_command.args.unnamed.arg1 == 'amend' }}
+        with:
+          file_pattern: ${{ github.workspace	}}${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+          signoff: true
+          commit_options: '--${{ github.event.client_payload.slash_command.args.unnamed.arg1 }} --signoff'
+

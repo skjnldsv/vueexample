@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>vueexample</id>
+    <name>Vue example</name>
+    <summary>A vue example app</summary>
+    <description><![CDATA[test]]></description>
+    <version>4.0.0</version>
+    <licence>agpl</licence>
+    <author mail="jus@bitgrid.net" >Julius Härtl</author>
+	<author mail="skjnldsv@protonmail.com">John Molakvoæ</author>
+    <namespace>VueExample</namespace>
+    <category>tools</category>
+    <bugs>https://github.com</bugs>
+    <dependencies>
+        <nextcloud min-version="16" max-version="19"/>
+    </dependencies>
+    <navigations>
+        <navigation>
+            <name>VueExample</name>
+            <route>vueexample.page.index</route>
+        </navigation>
+    </navigations>
+</info>
