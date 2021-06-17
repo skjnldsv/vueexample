@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2019 John Molakvoæ <skjnldsv@protonmail.com>
@@ -30,7 +31,6 @@ use OCP\AppFramework\Controller;
 use OCP\Util;
 
 class PageController extends Controller {
-
 	protected $appName;
 
 	public function __construct($appName, IRequest $request) {
@@ -46,7 +46,7 @@ class PageController extends Controller {
 		Util::addScript($this->appName, 'vueexample-main');
 		Util::addStyle($this->appName, 'icons');
 
-		$response = new TemplateResponse($this->appName, 'main');
+		$response = new TemplateResponse($this->appName, $this->appName . '-main');
 		return $response;
 	}
 }

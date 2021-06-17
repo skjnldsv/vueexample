@@ -14,7 +14,27 @@ jobs:
           echo ${{ github.event.client_payload.slash_command.args.unnamed.all }}
           echo ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
           echo ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
-          echo ${{ github.event.client_payload.slash_command.args.named.region }}
-          echo ${{ github.event.client_payload.slash_command.args.named.branch }}
-          echo ${{ github.event.client_payload.slash_command.args.named.reason }}
-          # etc.
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read package.json node and npm engines version
+        uses: skjnldsv/read-package-engines-version-actions@v1
+        id: package-engines-versions
+
+      - name: Show node version number
+        run: echo "Node version is ${{ steps.package-engines-versions.outputs.nodeVersion }}"
+
+      - name: Show npm version number
+        run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.package-engines-versions.outputs.nodeVersion }}
+
+      - name: Set up npm
+        run: npm i -g npm"@${{ steps.package-engines-versions.outputs.npmVersion }}"
+
+      - name: Compile
+        run: echo compile

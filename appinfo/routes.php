@@ -22,8 +22,8 @@
  */
 
 return [
-    'routes' => [
-	   ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-	   ['name' => 'page#mail', 'url' => '/mail', 'verb' => 'GET'],
-    ]
+	'routes' => [
+		['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
+		['name' => 'page#mail', 'url' => '/mail', 'verb' => 'GET'],
+	]
 ];
