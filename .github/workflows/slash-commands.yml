@@ -1,0 +1,19 @@
+name: Slash Command Dispatch
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  slashCommandDispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          commands: |
+            compile
+          issue-type: pull-request
+          permission: write
+          reaction-token: ${{ secrets.PAT }}
+          reactions: true
+          token: ${{ secrets.PAT }}
