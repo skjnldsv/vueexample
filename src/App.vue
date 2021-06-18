@@ -93,16 +93,21 @@
 					icon="icon-category-enabled"
 					:pinned="true" />
 			</template>
-			<AppNavigationSettings>
-				Example settings
-			</AppNavigationSettings>
+
+			<template #footer>
+				<AppNavigationSettings>
+					Example settings
+				</AppNavigationSettings>
+			</template>
 		</AppNavigation>
+
 		<AppContent>
 			<span>This is the content</span>
 			<button @click="show = !show">
 				Toggle sidebar
 			</button>
 		</AppContent>
+
 		<AppSidebar v-show="show"
 			title="eberhard-grossgasteiger-VDw-nsi5TpE-unsplash.jpg"
 			subtitle="4,3 MB, last edited 41 days ago"
