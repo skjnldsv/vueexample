@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
+          token: ${{ secrets.COMMAND_BOT_PAT }}
           ref: ${{ env.ref }}
           fetch-depth: 0
 
