@@ -53,6 +53,7 @@ jobs:
           file_pattern: ${{ github.workspace }}${{ env.arg1 }}
           commit_message: 'Compile assets'
           commit_options: '--signoff'
+          push_options: ''
 
       - name: Add & Commit fixup
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -67,5 +68,5 @@ jobs:
         if: ${{ env.arg1 == 'amend' }}
         with:
           file_pattern: ${{ github.workspace }}${{ env.arg2 }}
-          commit_options: '--amend --signoff'
-          push_options: '--force'
+          commit_options: '--amend --no-edit --signoff'
+          push_options: ''
