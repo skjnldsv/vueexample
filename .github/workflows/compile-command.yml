@@ -12,6 +12,14 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
+      - name: Set variables
+        run: |
+          if [[ "${{startsWith(env.arg1, '/')}}" ]]; then
+            echo "PATH=${{ github.workspace }}${{env.arg1}}" >> "$GITHUB_ENV"
+          else
+            echo "PATH=${{ github.workspace }}${{env.arg2}}" >> "$GITHUB_ENV"
+          fi
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -22,6 +30,7 @@ jobs:
       - name: Read package.json node and npm engines version
         uses: skjnldsv/read-package-engines-version-actions@v1
         id: package-engines-versions
+          fi
 
       - name: Set up node ${{ steps.package-engines-versions.outputs.nodeVersion }}
         uses: actions/setup-node@v2
@@ -35,6 +44,10 @@ jobs:
         run: |
           npm ci
           npm run build --if-present
+
+      - name: Check changes in ${{ env.path }}
+        run: |
+          bash -c "[[ \"`git status --porcelain `\" ]] || ( echo 'Nothing to commit' && exit 1 )"
 
       - name: Setup git
         run: |
