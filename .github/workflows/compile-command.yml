@@ -6,7 +6,7 @@ on:
 env:
   arg1: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
   arg2: ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
-  ref: ${{ env.ref }}
+  ref: ${{ github.event.client_payload.pull_request.head.ref }}
 
 jobs:
   compile:
