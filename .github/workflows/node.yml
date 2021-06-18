@@ -20,12 +20,6 @@ jobs:
         uses: skjnldsv/read-package-engines-version-actions@v1
         id: package-engines-versions
 
-      - name: Show node version number
-        run: echo "Node version is ${{ steps.package-engines-versions.outputs.nodeVersion }}"
-
-      - name: Show npm version number
-        run: echo "Npm version is ${{ steps.package-engines-versions.outputs.npmVersion }}"
-
       - name: Set up node ${{ steps.package-engines-versions.outputs.nodeVersion }}
         uses: actions/setup-node@v2
         with:
