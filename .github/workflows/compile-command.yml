@@ -6,6 +6,7 @@ on:
 env:
   arg1: ${{ github.event.client_payload.slash_command.args.unnamed.arg1 }}
   arg2: ${{ github.event.client_payload.slash_command.args.unnamed.arg2 }}
+  ref: ${{ env.ref }}
 
 jobs:
   compile:
@@ -15,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
-          ref: ${{ github.event.client_payload.pull_request.head.ref }}
+          ref: ${{ env.ref }}
           fetch-depth: 0
 
       - name: Read package.json node and npm engines version
@@ -41,32 +42,29 @@ jobs:
           npm ci
           npm run build --if-present
 
-      - name: Check  changes
+      - name: Setup git
         run: |
-          bash -c "git status"
+          git config --local user.email "npmbuildbot-nextcloud[bot]@users.noreply.github.com"
+          git config --local user.name "npmbuildbot-nextcloud[bot]"  
 
       - name: Add & Commit default
-        uses: stefanzweifel/git-auto-commit-action@v4
         # If the first argument starts with a /
         if: ${{ startsWith(env.arg1, '/') }}
-        with:
-          file_pattern: ${{ github.workspace }}${{ env.arg1 }}
-          commit_message: 'Compile assets'
-          commit_options: '--signoff'
-          push_options: ''
+        run: |
+          git add ${{ github.workspace }}${{ env.arg1 }}
+          git commit --signoff -m 'Compile assets'
+          git push origin ${{ env.ref }}
 
       - name: Add & Commit fixup
-        uses: stefanzweifel/git-auto-commit-action@v4
         if: ${{ env.arg1 == 'fixup' }}
-        with:
-          file_pattern: ${{ github.workspace }}${{ env.arg2 }}
-          commit_options: '--fixup=HEAD --signoff'
-          push_options: ''
+        run: |
+          git add ${{ github.workspace }}${{ env.arg2 }}
+          git commit --fixup=HEAD --signoff
+          git push origin ${{ env.ref }}
 
       - name: Add & Commit amend
-        uses: stefanzweifel/git-auto-commit-action@v4
         if: ${{ env.arg1 == 'amend' }}
-        with:
-          file_pattern: ${{ github.workspace }}${{ env.arg2 }}
-          commit_options: '--amend --no-edit --signoff'
-          push_options: '--force'
+        run: |
+          git add ${{ github.workspace }}${{ env.arg2 }}
+          git commit --amend --no-edit --signoff
+          git push --force origin ${{ env.ref }}
