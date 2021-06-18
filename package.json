@@ -1,7 +1,7 @@
 {
 	"name": "vueexample",
 	"description": "A simple Nextcloud app using vue-components",
-	"version": "4.0.0",
+	"version": "5.0.0",
 	"author": "John Molakvoæ <skjnldsv@protonmail.com>",
 	"contributors": [
 		"John Molakvoæ <skjnldsv@protonmail.com>"
@@ -34,7 +34,7 @@
 	},
 	"dependencies": {
 		"@nextcloud/l10n": "^1.4.1",
-		"@nextcloud/vue": "^3.7.0",
+		"@nextcloud/vue": "^4.0.2",
 		"vue": "^2.6.12"
 	},
 	"browserslist": [
