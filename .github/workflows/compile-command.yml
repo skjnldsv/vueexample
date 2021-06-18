@@ -15,9 +15,9 @@ jobs:
       - name: Set variables
         run: |
           if [[ "${{startsWith(env.arg1, '/')}}" ]]; then
-            echo "PATH=${{ github.workspace }}${{env.arg1}}" >> "$GITHUB_ENV"
+            echo "GIT_PATH=${{ github.workspace }}${{env.arg1}}" >> "$GITHUB_ENV"
           else
-            echo "PATH=${{ github.workspace }}${{env.arg2}}" >> "$GITHUB_ENV"
+            echo "GIT_PATH=${{ github.workspace }}${{env.arg2}}" >> "$GITHUB_ENV"
           fi
 
       - name: Checkout
@@ -44,7 +44,7 @@ jobs:
           npm ci
           npm run build --if-present
 
-      - name: Check changes in ${{ env.path }}
+      - name: Check changes in ${{ env.git_path }}
         run: |
           bash -c "[[ \"`git status --porcelain `\" ]] || ( echo 'Nothing to commit' && exit 1 )"
 
@@ -57,20 +57,30 @@ jobs:
         # If the first argument starts with a /
         if: ${{ startsWith(env.arg1, '/') }}
         run: |
-          git add ${{ github.workspace }}${{ env.arg1 }}
+          git add ${{ env.git_path }}
           git commit --signoff -m 'Compile assets'
           git push origin ${{ env.ref }}
 
       - name: Commit and push fixup
         if: ${{ env.arg1 == 'fixup' }}
         run: |
-          git add ${{ github.workspace }}${{ env.arg2 }}
+          git add ${{ env.git_path }}
           git commit --fixup=HEAD --signoff
           git push origin ${{ env.ref }}
 
       - name: Commit and push amend
         if: ${{ env.arg1 == 'amend' }}
         run: |
-          git add ${{ github.workspace }}${{ env.arg2 }}
+          git add ${{ env.git_path }}
           git commit --amend --no-edit --signoff
           git push --force origin ${{ env.ref }}
+
+      # Add reaction to the comment
+      - name: Add reaction
+        uses: peter-evans/create-or-update-comment@v1
+        if: failure()
+        with:
+          token: ${{ secrets.COMMAND_BOT_PAT }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          reaction-type: "-1"
