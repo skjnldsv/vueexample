@@ -15,7 +15,7 @@ jobs:
       - name: Set variables
         # Init path depending on which command is run
         run: |
-          if [[ ${{ startsWith(env.arg1, '/') }} ]]; then
+          if ${{ startsWith(env.arg1, '/') }}; then
             echo "git_path=${{ github.workspace }}${{env.arg1}}" >> "$GITHUB_ENV"
           else
             echo "git_path=${{ github.workspace }}${{env.arg2}}" >> "$GITHUB_ENV"
