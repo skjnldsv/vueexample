@@ -61,7 +61,7 @@ jobs:
         with:
           file_pattern: ${{ github.workspace }}${{ env.arg2 }}
           commit_options: '--fixup=HEAD --signoff'
-          push_options: '--force'
+          push_options: ''
 
       - name: Add & Commit amend
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -69,4 +69,4 @@ jobs:
         with:
           file_pattern: ${{ github.workspace }}${{ env.arg2 }}
           commit_options: '--amend --no-edit --signoff'
-          push_options: ''
+          push_options: '--force'
