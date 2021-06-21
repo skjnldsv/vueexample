@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.COMMAND_BOT_PAT }}
           fetch-depth: 0
       
-      - name: Checkout PR
+      - name: Checkout PR ${{ github.event.issue.number }}
         # Comments are not run within PR's context
         run: hub pr checkout ${{ github.event.issue.number }}
 
