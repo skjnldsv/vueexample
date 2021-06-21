@@ -19,21 +19,24 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           reaction-type: "+1"
 
-      - name: Set variables
-        # Init args and path depending on which command is run
+      - name: Init arguments
+        # Init arguments
         run: |
           command="${{ github.event.comment.body }}"
           arguments=($command)
           echo "arg1=${arguments[1]}" >> "$GITHUB_ENV"
           echo "arg2=${arguments[2]}" >> "$GITHUB_ENV"
-    
+
+      - name: Init path
+        # Init path depending on which command is run
+        run: |    
           if ${{ startsWith(env.arg1, '/') }}; then
             echo "git_path=${{ github.workspace }}${{env.arg1}}" >> "$GITHUB_ENV"
           else
             echo "git_path=${{ github.workspace }}${{env.arg2}}" >> "$GITHUB_ENV"
           fi
 
-      - name: Gather comment data
+      - name: Init branch
         uses: xt0rted/pull-request-comment-branch@v1
         id: comment-branch
 
