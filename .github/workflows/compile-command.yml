@@ -14,7 +14,7 @@ jobs:
       - name: Set variables
         # Init path depending on which command is run
         run: |
-          command = ${{ github.event.comment.body }}
+          command="${{ github.event.comment.body }}""
           arguments=($command)
           echo ${arguments[0]}
           echo ${arguments[1]}
