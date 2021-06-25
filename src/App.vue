@@ -77,7 +77,7 @@
 					</template>
 				</AppNavigationItem>
 				<AppNavigationItem title="Loading Item" :loading="true" />
-				<AppNavigationItem title="Event Item" icon="icon-folder" @click="console.log('clicked')" />
+				<AppNavigationItem title="Event Item" icon="icon-folder" @click="log($event, 'clicked')" />
 				<AppNavigationItem title="Editable Item"
 					icon="icon-folder"
 					:editable="true"
@@ -102,17 +102,18 @@
 		</AppNavigation>
 
 		<AppContent>
-			<span>This is the content</span>
+			<div>This is the content</div>
 			<button @click="show = !show">
 				Toggle sidebar
 			</button>
 		</AppContent>
 
-		<AppSidebar v-show="show"
+		<AppSidebar
+			v-show="show"
 			title="eberhard-grossgasteiger-VDw-nsi5TpE-unsplash.jpg"
 			subtitle="4,3 MB, last edited 41 days ago"
 			:starred.sync="starred"
-			@close="show=false">
+			@close="close">
 			<template #primary-actions>
 				<button class="primary">
 					Button 1
@@ -123,6 +124,7 @@
 					type="checkbox">
 				<label for="link-checkbox" class="link-checkbox-label">Do something</label>
 			</template>
+
 			<template #secondary-actions>
 				<ActionButton icon="icon-edit" @click="alert('Edit')">
 					Edit
@@ -132,6 +134,7 @@
 				</ActionButton>
 				<ActionLink icon="icon-external" title="Link" href="https://nextcloud.com" />
 			</template>
+
 			<AppSidebarTab id="vueexample" name="Vueexample" icon="icon-vueexample">
 				this is the vueexample tab
 			</AppSidebarTab>
@@ -194,31 +197,20 @@ export default {
 	data() {
 		return {
 			loading: false,
-			date: Date.now() + 86400000 * 3,
-			date2: Date.now() + 86400000 * 3 + Math.floor(Math.random() * 86400000 / 2),
 			show: true,
 			starred: false,
 		}
 	},
 	methods: {
-		addOption(val) {
-			this.options.push(val)
-			this.select.push(val)
+		close() {
+			this.show = false
+			console.debug(arguments)
 		},
-		previous(data) {
-			console.debug(data)
+		newButtonAction() {
+			console.debug(arguments)
 		},
-		next(data) {
-			console.debug(data)
-		},
-		close(data) {
-			console.debug(data)
-		},
-		newButtonAction(e) {
-			console.debug(e)
-		},
-		log(e) {
-			console.debug(e)
+		log() {
+			console.debug(arguments)
 		},
 	},
 }
