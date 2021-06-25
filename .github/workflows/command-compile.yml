@@ -50,6 +50,9 @@ jobs:
       - name: Read package.json node and npm engines version
         uses: skjnldsv/read-package-engines-version-actions@v1
         id: package-engines-versions
+        with:
+          fallbackNode: '^12'
+          fallbackNpm: '^6'
 
       - name: Set up node ${{ steps.package-engines-versions.outputs.nodeVersion }}
         uses: actions/setup-node@v2
