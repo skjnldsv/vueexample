@@ -58,6 +58,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ steps.package-engines-versions.outputs.nodeVersion }}
+          cache: npm
 
       - name: Set up npm ${{ steps.package-engines-versions.outputs.npmVersion }}
         run: npm i -g npm@"${{ steps.package-engines-versions.outputs.npmVersion }}"
