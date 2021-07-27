@@ -12,20 +12,21 @@ on:
       - stable*
 
 jobs:
-  auto-approve:
+  auto-approve-merge:
     runs-on: ubuntu-latest
+
     steps:
+      # Check actor and fail
+      - name: Check dependabot author
+        if: github.actor != 'dependabot[bot]'
+        run: exit 1
+
       # Github actions bot approve
       - uses: hmarr/auto-approve-action@v2
-        if: github.actor == 'dependabot[bot]'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  # Nextcloud bot approve and merge request
-  auto-merge:
-    runs-on: ubuntu-latest
-    needs: auto-approve
-    steps:
+      # Nextcloud bot approve and merge request
       - uses: ahmadnassri/action-dependabot-auto-merge@v2
         with:
           target: minor
