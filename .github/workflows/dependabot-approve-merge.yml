@@ -12,15 +12,11 @@ on:
       - stable*
 
 jobs:
-  auto-approve-merge:
+  auto-merge:
     runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
 
     steps:
-      # Check actor and fail
-      - name: Check dependabot author
-        if: github.actor != 'dependabot[bot]'
-        run: exit 1
-
       # Github actions bot approve
       - uses: hmarr/auto-approve-action@v2
         with:
