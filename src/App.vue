@@ -147,9 +147,6 @@
 			<AppSidebarTab id="sharing" name="Sharing" icon="icon-shared">
 				this is the sharing tab
 			</AppSidebarTab>
-			<AppSidebarTab id="versions" name="Versions" icon="icon-history">
-				this is the versions tab
-			</AppSidebarTab>
 		</AppSidebar>
 	</Content>
 </template>
