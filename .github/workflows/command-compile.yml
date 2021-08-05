@@ -11,10 +11,10 @@ jobs:
     if: github.event.issue.pull_request != '' && startsWith(github.event.comment.body, '/compile')
 
     outputs:
-      git_path: ${{ env.git_path }}
+      git_path: ${{ steps.git-path.outputs.path }}
       arg1: ${{ steps.command.outputs.arg1 }}
       arg2: ${{ steps.command.outputs.arg2 }}
-      head: ${{ steps.comment-branch.outputs.head_ref }}
+      head_ref: ${{ steps.comment-branch.outputs.head_ref }}
 
     steps:
       - name: Check actor permission
@@ -34,13 +34,14 @@ jobs:
         uses: skjnldsv/parse-command-comment@master
         id: command
 
+      # Init path depending on which command is run
       - name: Init path
-        # Init path depending on which command is run
+        id: git-path
         run: |    
           if ${{ startsWith(steps.command.outputs.arg1, '/') }}; then
-            echo "git_path=${{ github.workspace }}${{steps.command.outputs.arg1}}" >> "$GITHUB_ENV"
+            echo "::set-output name=path::${{ github.workspace }}${{steps.command.outputs.arg1}}"
           else
-            echo "git_path=${{ github.workspace }}${{steps.command.outputs.arg2}}" >> "$GITHUB_ENV"
+            echo "::set-output name=path::${{ github.workspace }}${{steps.command.outputs.arg2}}"
           fi
 
       - name: Init branch
@@ -52,12 +53,12 @@ jobs:
     needs: init
 
     steps:
-      - name: Checkout
+      - name: Checkout ${{ needs.init.outputs.head_ref }}
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.COMMAND_BOT_PAT }}
           fetch-depth: 0
-          ref: ${{ steps.comment-branch.outputs.head_ref }}
+          ref: ${{ needs.init.outputs.head_ref }}
 
       - name: Setup git
         run: |
@@ -84,28 +85,27 @@ jobs:
         run: |
           npm ci
           npm run build --if-present
-          npm run package --if-present
 
       - name: Commit and push default
         if: ${{ needs.init.outputs.arg1 != 'fixup' && needs.init.outputs.arg1 != 'amend' }}
         run: |
           git add ${{ needs.init.outputs.git_path }}
           git commit --signoff -m 'Compile assets'
-          git push origin ${{ env.ref }}
+          git push origin ${{ needs.init.outputs.head_ref }}
 
       - name: Commit and push fixup
         if: ${{ needs.init.outputs.arg1 == 'fixup' }}
         run: |
-          git add ${{ env.git_path }}
+          git add ${{ needs.init.outputs.git_path }}
           git commit --fixup=HEAD --signoff
-          git push origin ${{ env.ref }}
+          git push origin ${{ needs.init.outputs.head_ref }}
 
       - name: Commit and push amend
         if: ${{ needs.init.outputs.arg1 == 'amend' }}
         run: |
-          git add ${{ env.git_path }}
+          git add ${{ needs.init.outputs.git_path }}
           git commit --amend --no-edit --signoff
-          git push --force origin ${{ env.ref }}
+          git push --force origin ${{ needs.init.outputs.head_ref }}
 
       - name: Add reaction on failure
         uses: peter-evans/create-or-update-comment@v1
